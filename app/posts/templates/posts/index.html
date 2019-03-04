@@ -9,6 +9,9 @@
 {% endblock %}
 
 {% block content %}
+
+    <a href="{{ url_for('posts.create_post') }}"><span class="btn btn-success">Create post</span></a>
+
     {% for post in posts %}
         <p>
             <a href="{{ url_for('posts.post_detail', slug=post.slug) }}">{{ post.title }}</a>
