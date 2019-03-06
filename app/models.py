@@ -16,11 +16,12 @@ class Post(db.Model):
     title = db.Column(db.String(140))
     slug = db.Column(db.String(140), unique=True)
     body = db.Column(db.Text)
-    created = db.Column(db.DateTime, default=datetime.now())
+    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         super(Post, self).__init__(*args, **kwargs)
         self.generate_slug()
+        self.created = datetime.utcnow()
 
     tags = db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'))
 
